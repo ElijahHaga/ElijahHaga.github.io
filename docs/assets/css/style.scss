@@ -1,9 +1,15 @@
 ---
 ---
 @import "{{ site.theme }}";
+.splide__slide {
+    display: flex;
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center;     /* Centers the image vertically */
+}
+
 .splide__slide img {
-    width: 100%;
-    height: auto;
+    width: 50%;
+    height: 50%;
 }
 
 body, html {
