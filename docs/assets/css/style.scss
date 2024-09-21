@@ -1,16 +1,6 @@
 ---
 ---
 @import "{{ site.theme }}";
-.splide__slide {
-    display: flex;
-    justify-content: center; /* Centers the image horizontally */
-    align-items: center;     /* Centers the image vertically */
-}
-
-.splide__slide img {
-    width: 50%;
-    height: 50%;
-}
 
 body, html {
     height: 100%;
@@ -21,4 +11,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.splide__slide {
+    display: flex;
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center;     /* Centers the image vertically */
+}
+
+.splide__slide img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 50%;
+    height: 50%;
 }
