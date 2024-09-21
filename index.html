@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
 <body style="background-color: #0f0f0f">
+
+<script>
+    document.addEventListener( 'DOMContentLoaded', function () {
+        new Splide( '#image-carousel' ).mount();
+    } );
+</script>
+
 <h1>
     <font color="white">
         Elijah Haga
     <font>
 </h1>
+
 <p>
     <font size="4" color="white">
         <b>
@@ -13,31 +21,48 @@
         </b>
     </font>
 </p>
+
 <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
+
 <p>
     <font size="3" color="white">
         LED Ring Circuit Board
     </font>
 </p>
+
 <img src="docs/assets/LED Ring Front 2D.png" height="295" width="300" alt="LED Ring Front 2D Layout" align="middle"/>
 <img src="docs/assets/LED Ring Corner 3D.png" height="225" width="315" alt="LED Ring Corner" align="middle"/>
 <img src="docs/assets/LED Ring Front 3D.png" height="307" width="307" alt="LED Ring Front 3D Layout" align="middle"/>
 <img src="docs/assets/LED Ring Back 3D.png" height="305" width="305" alt="LED Ring Back 3D Layout" align="middle"/>
+
 <p>
-    This circuit board is an LED ring PCB that I designed in <a href="https://www.flux.ai/">Flux</a>, a free browser-based ECAD. It uses an
-    STM32F030CCT6 microcontroller and a BMI160 6-axis gyroscope to control 20 LEDs depending on the orientation of
-    the circuit board. It is charged an programmed by a USB-C port. I thought of, researched, and designed this
-    circuit board completely on my own, doing my own parts selection and BOM while learning how to use Flux.
-    I definitely prefer Altium Designer, but I used Flux to see how well I could adapt my skills to a completely
-    different ECAD.
+    This circuit board is an LED ring PCB that I designed in <a href="https://www.flux.ai/" target="_blank">Flux</a>,
+    a free browser-based ECAD. It uses an STM32F030CCT6 microcontroller and a BMI160 6-axis gyroscope to control 20
+    LEDs depending on the orientation of the circuit board. It is charged an programmed by a USB-C port. I thought
+    of, researched, and designed this circuit board completely on my own, doing my own parts selection and BOM while
+    learning how to use Flux. I definitely prefer Altium Designer, but I used Flux to see how well I could adapt my
+    skills to a completely different ECAD.
 </p>
+
 <img src="docs/assets/Raspberry Pi Pico Main Schematic.png" height="279" width="352" alt="Raspberry Pi Pico Main Schematic" align="middle"/>
 <img src="docs/assets/Raspberry Pi Pico Power Schematic.png" height="130" width="425" alt="Raspberry Pi Pico Power Schematic" align="middle"/>
 <img src="docs/assets/Raspberry Pi Pico Front.png" height="310" width="240" alt="Raspberry Pi Pico Front 3D Layout" align="middle"/>
 <img src="docs/assets/Raspberry Pi Pico Back.png" height="330" width="256" alt="Raspberry Pi Pico Back #D Layout" align="middle"/>
-<p>
 
-</p>
-
+<section id="image-carousel" class="splide" aria-label="Beautiful Images">
+    <div class="splide__track">
+          <ul class="splide__list">
+              <li class="splide__slide">
+                  <img src="docs/assets/Raspberry Pi Pico Front.png" alt="">
+              </li>
+              <li class="splide__slide">
+                  <img src="docs/assets/Raspberry Pi Pico Back.png" alt="">
+              </li>
+              <li class="splide__slide">
+                  <img src="docs/assets/Raspberry Pi Pico Main Schematic.png" alt="">
+              </li>
+          </ul>
+    </div>
+</section>
 </body>
 </html>
