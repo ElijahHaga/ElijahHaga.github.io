@@ -8,6 +8,13 @@
         new Splide( '#image-carousel' ).mount();
     } );
 </script>
+<style>
+    .splide__slide {
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center;     /* Centers vertically */
+    }
+</style>
 </head>
 
 <body style="background-color: #0f0f0f">
@@ -57,12 +64,21 @@
           <ul class="splide__list">
               <li class="splide__slide">
                   <img src="docs/assets/Raspberry Pi Pico Front.png" alt="">
+                  <div>
+                    The front layout of the PCB
+                  </div>
               </li>
               <li class="splide__slide">
                   <img src="docs/assets/Raspberry Pi Pico Back.png" alt="">
+                  <div>
+                    The back layout of the PCB
+                  </div>
               </li>
               <li class="splide__slide">
                   <img src="docs/assets/Raspberry Pi Pico Main Schematic.png" alt="">
+                  <div>
+                    The main schematic of the circuit board
+                  </div>
               </li>
           </ul>
     </div>
