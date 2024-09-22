@@ -5,7 +5,12 @@
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 <script>
     document.addEventListener( 'DOMContentLoaded', function () {
-        new Splide( '#image-carousel', {
+        new Splide( '#carousel-led-ring', {
+		    perPage: 2, breakpoints: {640: {perPage: 1,},},
+        } ).mount();
+    } );
+    document.addEventListener( 'DOMContentLoaded', function () {
+        new Splide( '#carousel-raspberry-pi-pico', {
 		    perPage: 2, breakpoints: {640: {perPage: 1,},},
         } ).mount();
     } );
@@ -66,7 +71,7 @@
     </font>
 </p>
 
-<section id="image-carousel" class="splide" aria-label="LED Ring PCB Photos">
+<section id="carousel-led-ring" class="splide" aria-label="LED Ring PCB Photos">
         <div class="splide__track">
             <ul class="splide__list">
                 <li class="splide__slide">
@@ -95,7 +100,7 @@
     skills to a completely different ECAD.
 </p>
 
-<section id="image-carousel" class="splide" aria-label="Raspberry Pi Pico Images">
+<section id="carousel-raspberry-pi-pico" class="splide" aria-label="Raspberry Pi Pico Images">
     <div id="rectangle">
         <div class="splide__track">
             <ul class="splide__list">
