@@ -9,6 +9,12 @@
     } );
 </script>
 <style>
+    #rectangle {
+        border: 2px solid white; /* Creates a white border */
+        padding: 20px; /* Adds space between the border and the content */
+        margin: 20px auto; /* Centers the rectangle */
+        max-width: 90%; /* Ensures the rectangle doesn't overflow the page */
+    }
     .splide__slide {
         display: flex;
         justify-content: center; /* Centers horizontally */
@@ -55,7 +61,7 @@
 </p>
 
 <section id="image-carousel" class="splide" aria-label="Raspberry Pi Pico Images">
-    <div id="rectangle" color="white">
+    <div id="rectangle">
         <div class="splide__track">
             <ul class="splide__list">
                 <li class="splide__slide">
