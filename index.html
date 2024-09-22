@@ -12,9 +12,15 @@
     #rectangle {
         background: #3a3c40;
         padding: 20px; /* Adds space between the border and the content */
-        margin: 20px auto; /* Centers the rectangle */
-        display: inline-block;
+        display: inline-block; /* Allows dynamic width based on content */
+        margin: 0 auto; /* Centers the rectangle horizontally */
     }
+
+    /* Centers the entire carousel on the page */
+    #image-carousel {
+        text-align: center; /* Centers the carousel */
+    }
+
     .splide__slide {
         display: flex;
         justify-content: center; /* Centers horizontally */
