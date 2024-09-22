@@ -13,14 +13,32 @@
 <style>
     #rectangle {
         background: #3a3c40;
-        padding: 20px; /* Adds space between the border and the content */
-        margin: 20px auto; /* Centers the rectangle */
-        max-width: 70%; /* Ensures the rectangle doesn't overflow the page */
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 90%; /* Ensure rectangle adapts to the width of the viewport */
     }
+
+    /* Carousel styling */
+    #image-carousel {
+        max-width: 100%; /* Allow the carousel to take up available space */
+        overflow: hidden;
+    }
+
+    .splide__track {
+        overflow: hidden;
+    }
+
     .splide__slide {
+        min-width: 50%; /* Ensures that at least two slides are visible per page */
         display: flex;
-        justify-content: center; /* Centers horizontally */
-        align-items: center;     /* Centers vertically */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .splide__slide img {
+        max-width: 100%; /* Ensure the image fits the slide */
+        height: auto; /* Keep the aspect ratio */
+        object-fit: contain; /* Ensure images don't overflow */
     }
 </style>
 </head>
