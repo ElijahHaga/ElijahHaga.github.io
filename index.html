@@ -76,6 +76,52 @@
 <p>
     <font size="5" color="white">
         <b>
+            Gameboy Color Cartridge
+        </b>
+    </font>
+</p>
+
+<section id="carousel-gameboy-color-cartridge" class="splide" aria-label="Gameboy Color Cartridge">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 3D Corner.png" height="450" width="629" alt="Gameboy Color Cartridge 3D Corner" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 3D Front.png" height="466" width="398" alt="Gameboy Color Cartridge Front 3D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 3D Back.png" height="518" width="440" alt="Gameboy Color Cartridge Back 3D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 2D Front Layout.png" height="468" width="404" alt="Gameboy Color Cartridge Front 2D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 2D Back Layout.png" height="441" width="375" alt="Gameboy Color Cartridge Back 2D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide"></li>
+                    <img src="docs/assets/Gameboy Color Cartridge Schematic.png" height="533" width="671" alt="Gameboy Color Cartridge Schematic" align="middle"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<p>
+    This PCB is a Gameboy Color Cartridge circuit board that I reverse engineered. I researched the parts in the
+    original cartridges, recreated them in modern 3D models and footprints, and arranged them in the same positions
+    they are in in the original cartridges, but I routed the traces and placed the copper pour to my own design.
+    It uses an MBC5 chip to map storage to a MX23C8005-12 read-only memory (ROM) to store the game files, and a
+    W24257S-70LL random access memory (RAM) chip to store the save states for the player. It also has a MM1134A
+    as a back-up IC. It interfaces with the Gameboy Color using a 32-pin card edge slot. I used Altium Designer
+    and the <a href="https://github.com/issus/altium-library" target="_blank">Celestial Altium Library</a> for this
+    project as well. This was another project that I did to improve my ECAD skills and to practice reverse
+    engineering of circuit boards.
+</p>
+
+<p>
+    <font size="5" color="white">
+        <b>
             LED Ring Circuit Board
         </b>
     </font>
@@ -109,6 +155,7 @@
     learning how to use Flux. I definitely prefer Altium Designer, but I used Flux to see how well I could adapt my
     skills to a completely different ECAD.
 </p>
+
 
 <p>
     <font size="5" color="white">
@@ -152,52 +199,6 @@
     RP2040 model and a few other more complicated components myself. The circuit board uses an RP2040 microcontroller,
     which can be programmed using the Raspberry Pi operating system and Python. This was my first project in
     computer/control boards, which is the board design I like most.
-</p>
-
-<p>
-    <font size="5" color="white">
-        <b>
-            Gameboy Color Cartridge
-        </b>
-    </font>
-</p>
-
-<section id="carousel-gameboy-color-cartridge" class="splide" aria-label="Gameboy Color Cartridge">
-        <div class="splide__track">
-            <ul class="splide__list">
-                <li class="splide__slide">
-                    <img src="docs/assets/Gameboy Color Cartridge 3D Corner.png" height="450" width="629" alt="Gameboy Color Cartridge 3D Corner" align="middle"/>
-                </li>
-                <li class="splide__slide">
-                    <img src="docs/assets/Gameboy Color Cartridge 3D Front.png" height="466" width="398" alt="Gameboy Color Cartridge Front 3D Layout" align="middle"/>
-                </li>
-                <li class="splide__slide">
-                    <img src="docs/assets/Gameboy Color Cartridge 3D Back.png" height="518" width="440" alt="Gameboy Color Cartridge Back 3D Layout" align="middle"/>
-                </li>
-                <li class="splide__slide">
-                    <img src="docs/assets/Gameboy Color Cartridge 2D Front Layout.png" height="468" width="404" alt="Gameboy Color Cartridge Front 2D Layout" align="middle"/>
-                </li>
-                <li class="splide__slide">
-                    <img src="docs/assets/Gameboy Color Cartridge 2D Back Layout.png" height="441" width="375" alt="Gameboy Color Cartridge Back 2D Layout" align="middle"/>
-                </li>
-                <li class="splide__slide"></li>
-                    <img src="docs/assets/Gameboy Color Cartridge Schematic.png" height="533" width="671" alt="Gameboy Color Cartridge Schematic" align="middle"/>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<p>
-    This PCB is a Gameboy Color Cartridge circuit board that I reverse engineered. I researched the parts in the
-    original cartridges, recreated them in modern 3D models and footprints, and arranged them in the same positions
-    they are in in the original cartridges, but I routed the traces and placed the copper pour to my own design.
-    It uses an MBC5 chip to map storage to a MX23C8005-12 read-only memory (ROM) to store the game files, and a
-    W24257S-70LL random access memory (RAM) chip to store the save states for the player. It also has a MM1134A
-    as a back-up IC. It interfaces with the Gameboy Color using a 32-pin card edge slot. I used Altium Designer
-    and the <a href="https://github.com/issus/altium-library" target="_blank">Celestial Altium Library</a> for this
-    project as well. This was another project that I did to improve my ECAD skills and to practice reverse
-    engineering of circuit boards.
 </p>
 
 </body>
