@@ -21,6 +21,11 @@
 		    perPage: 2, breakpoints: {640: {perPage: 1,},},
         } ).mount();
     } );
+    document.addEventListener( 'DOMContentLoaded', function () {
+        new Splide( '#carousel-battery', {
+		    perPage: 2, breakpoints: {640: {perPage: 1,},},
+        } ).mount();
+    } );
 </script>
 
 <style>
@@ -62,6 +67,8 @@
         Elijah Haga
     <font>
 </h1>
+
+<hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
 
 <p>
     <font size="5" color="white">
@@ -202,6 +209,67 @@
     RP2040 model and a few other more complicated components myself. The circuit board uses an RP2040 microcontroller,
     which can be programmed using the Raspberry Pi operating system and Python. This was my first project in
     computer/control boards, which is the board design I like most.
+</p>
+
+<hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
+
+<p>
+    <font size="5" color="white">
+        <b>
+            Multidisciplinary Engineering and Science
+        </b>
+    </font>
+</p>
+
+<hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
+
+<p>
+    <font size="5" color="white">
+        <b>
+            Lithium-Ion Battery
+        </b>
+    </font>
+</p>
+
+<section id="carousel-battery" class="splide" aria-label="Lithium-Ion Battery Images and Paper">
+    <div id="rectangle">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">
+                    <img src="docs/assets/Measuring Cobalt Oxide.jpg" height="680" width="510" alt="Measuring Cobalt Oxide" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Measuring Lithium Chloride.jpg" height="680" width="510" alt="Measuring Lithium Chloride" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Final Cobalt Oxide Paste.jpg" height="680" width="510" alt="Final Cobalt Oxide Paste" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/AP Chem Final Project.pdf" alt="AP Chem Final Paper" align="middle"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<p>
+    For my final project in AP Chem, I chose to research and fabricate a lithium-ion battery using the materials in
+    my high school's lab. I only had a month to complete this assignment, so I was not able to document much of the
+    process, but I have a few pctures as well as my ten-page lab report about my findings. As my report states, I
+    used a Lithium Cobalt Oxide (LiCoO<sub>2</sub>) cathode (specifically low-temperature LiCoO<sub>2</sub>, I
+    eplain this important distinction in my paper) and a graphite anode. These materials were ground into powders to achieve
+    an even charge distribution, then are mixed with a binding agent (in my case, PTFE, commonly known as teflon), a
+    condutive agent (I used carbon black), and a solvent to dissolve the binder, which I used isopropanol
+    (C<sub>3</sub>H<sub>8</sub>O) for. The mixture was distrubuted evenly to a aluminum sheet for the cathode and a
+    copper sheet for the anode. An ion-bridge must be constructed to allow the lithium ions to travel between the
+    cathode and anode, which I made out of polyethylene ((C<sub>2</sub>H<sub>4</sub>)<sub>n</sub>) due to it's high
+    availability (it's what plastic bags are made of) soaked in lithium perchlorate (LiClO<sub>4</sub>) as an
+    electrolyte dissolved in ethyl-methyl-carbonate (C<sub>4</sub>H<sub>8</sub>O<sub>3</sub>), which I had to harvest
+    from another battery as they were impossible to create with the materials provided to me. The ion-bridge was sandwiched
+    between the anode and cathode, then a wire with a resistor and LED were connected to the anode and cathode, along
+    with an oscilloscope probe. I was successfully able to measure a voltage of around 4 Volts for a short period before
+    the battery caught on wire, likely due to the anode and cathode powders spilling over the separator and shorting
+    together. Although the battery had to be destroyed, it proved successful in discharging for a short period of time.
 </p>
 
 </body>
