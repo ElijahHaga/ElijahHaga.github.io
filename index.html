@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Show iframe on Button Click</title>
+
 <script>
     document.addEventListener( 'DOMContentLoaded', function () { /* Initializing all of the carousel functions */
         new Splide( '#carousel-led-ring', {
@@ -249,9 +253,17 @@
     </div>
 </section>
 
-<div style="display: flex; justify-content: center; align-items: center;">
+<button onclick="showIframe()">View Paper</button>
+
+<div id="iframeContainer" style="display: none; justify-content: center; text-align: center;">
     <iframe src="docs/assets/AP Chem Final Project.pdf" title="AP Chem Final Paper" height="960" width="720" align="middle"></iframe>
 </div>
+
+<script>
+    function showIframe() {
+        document.getElementById("iframeContainer").style.display = "block";
+    }
+</script>
 
 <p>
     For my final project in AP Chem, I chose to research and fabricate a lithium-ion battery using the materials in
