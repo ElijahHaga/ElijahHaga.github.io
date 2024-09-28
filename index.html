@@ -251,24 +251,24 @@
 </p>
 
 
-<div style="text-align: center;">
+<div style="text-align: center;"> <!--Creates the toggle paper button, centered in the middle of the webpage-->
     <button class="button button1" onclick="toggleIframe()" id="toggleButton">View Paper</button>
 </div>
 
 <div id="iframeContainer" style="display: none; justify-content: center; text-align: center;">
     <iframe src="docs/assets/AP Chem Final Project.pdf" title="AP Chem Final Paper" height="960" width="720" align="middle"></iframe>
-</div>
+</div> <!--Defines the iframe of the paper-->
 
 <script>
-    function toggleIframe() {
+    function toggleIframe() { /* The function to toggle the Li-ion battery paper*/
         const iframeContainer = document.getElementById("iframeContainer");
         const button = document.getElementById("toggleButton");
 
-        if (iframeContainer.style.display === "none") {
+        if (iframeContainer.style.display === "none") { /* If the paper is out, the button will hide it*/
             iframeContainer.style.display = "block";
             button.innerText = "Hide Paper";
         } else {
-            iframeContainer.style.display = "none";
+            iframeContainer.style.display = "none"; /* Otherwise, the button will show the paper*/
             button.innerText = "View Paper";
         }
     }
@@ -276,7 +276,7 @@
 
 <p>
     For my final project in AP Chem, I chose to research and fabricate a lithium-ion battery using the materials in
-    my high school's lab. I only had a month to complete this assignment, so I was not able to document much of the
+    my high school's lab so as to get a better understanding of how Lithium-ion batteries work. I only had a month to complete this assignment, so I was not able to document much of the
     process, but I have my attached lab report about my findings. As my report states, I
     used a Lithium Cobalt Oxide (LiCoO<sub>2</sub>) cathode (specifically low-temperature LiCoO<sub>2</sub>, I
     eplain this important distinction in my paper) and a graphite anode. These materials were ground into powders to achieve
@@ -292,6 +292,22 @@
     with an oscilloscope probe. I was successfully able to measure a voltage of around 4 Volts for a short period before
     the battery caught on wire, likely due to the anode and cathode powders spilling over the separator and shorting
     together. Although the battery had to be destroyed, it proved successful in discharging for a short period of time.
+</p>
+
+<p>
+    <font size="5" color="white">
+        <b>
+            Ths Page!
+        </b>
+    </font>
+</p>
+
+<p>
+    To apply for your internship, I created this portflio. However, I did not want it to be a boring, typical portfolio,
+    so I designed the whole thing using GitHub Pages, which allows you to have one free webpage per GitHub account.
+    This meant that I had to learn website programming, which I had never done before. Creating the typical HTML elements
+    was quite easy; the real challenge started with using CSS and Javascript to style my webpage, such as creating
+    the image carousels and the button that toggles the paper I wrote on batteries.
 </p>
 
 </body>
