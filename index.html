@@ -7,7 +7,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Show iframe on Button Click</title>
+<title>Toggle iframe on Button Click</title>
 
 <script>
     document.addEventListener( 'DOMContentLoaded', function () { /* Initializing all of the carousel functions */
@@ -253,15 +253,24 @@
     </div>
 </section>
 
-<button onclick="showIframe()">View Paper</button>
+<button onclick="toggleIframe()" id="toggleButton">View Paper</button>
 
 <div id="iframeContainer" style="display: none; justify-content: center; text-align: center;">
     <iframe src="docs/assets/AP Chem Final Project.pdf" title="AP Chem Final Paper" height="960" width="720" align="middle"></iframe>
 </div>
 
 <script>
-    function showIframe() {
-        document.getElementById("iframeContainer").style.display = "block";
+    function toggleIframe() {
+        const iframeContainer = document.getElementById("iframeContainer");
+        const button = document.getElementById("toggleButton");
+
+        if (iframeContainer.style.display === "none") {
+            iframeContainer.style.display = "block";
+            button.innerText = "Hide Content";
+        } else {
+            iframeContainer.style.display = "none";
+            button.innerText = "View Content";
+        }
     }
 </script>
 
