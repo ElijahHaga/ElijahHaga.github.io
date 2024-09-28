@@ -2,17 +2,20 @@
 <html>
 <head>
 
+<!--Importing some libraries that make the splides work--->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
+<!--This helps define the webpage-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elijah Haga's Portfolio</title>
 
 <script>
-    document.addEventListener( 'DOMContentLoaded', function () { /* Initializing all of the carousel functions */
+    /* Initializing all of the carousel functions, 2 images will appear per slide if possible */
+    document.addEventListener( 'DOMContentLoaded', function () {
         new Splide( '#carousel-led-ring', {
-		    perPage: 2, breakpoints: {640: {perPage: 1,},}, /* 2 images will appear per slide if possible */
+		    perPage: 2, breakpoints: {640: {perPage: 1,},},
         } ).mount();
     } );
     document.addEventListener( 'DOMContentLoaded', function () {
@@ -25,11 +28,16 @@
 		    perPage: 2, breakpoints: {640: {perPage: 1,},},
         } ).mount();
     } );
+    document.addEventListener( 'DOMContentLoaded', function () {
+        new Splide( '#carousel-this-page', {
+		    perPage: 2, breakpoints: {640: {perPage: 1,},},
+        } ).mount();
+    } );
 </script>
 
 <style>
     #rectangle {
-        background: #0f0f0f; /*Make the rectangle blend in with the background color */
+        background: #0f0f0f; /* Make the rectangle blend in with the background color */
         padding: 20px;
         margin: 20px auto;
         max-width: 90%; /* Ensure rectangle adapts to the width of the viewport */
@@ -260,15 +268,15 @@
 </div> <!--Defines the iframe of the paper-->
 
 <script>
-    function toggleIframe() { /* The function to toggle the Li-ion battery paper*/
+    function toggleIframe() { /* The function to toggle the Li-ion battery paper */
         const iframeContainer = document.getElementById("iframeContainer");
         const button = document.getElementById("toggleButton");
 
-        if (iframeContainer.style.display === "none") { /* If the paper is out, the button will hide it*/
+        if (iframeContainer.style.display === "none") { /* If the paper is out, the button will hide it */
             iframeContainer.style.display = "block";
             button.innerText = "Hide Paper";
         } else {
-            iframeContainer.style.display = "none"; /* Otherwise, the button will show the paper*/
+            iframeContainer.style.display = "none"; /* Otherwise, the button will show the paper */
             button.innerText = "View Paper";
         }
     }
@@ -302,12 +310,45 @@
     </font>
 </p>
 
+<section id="carousel-this-page" class="splide" aria-label="Images of This Page's Development">
+    <div id="rectangle">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">
+                    <img src="docs/assets/Head Function Screenshot.png" height="251" width="480" alt="Screenshot of the Head Function of This Page's Code" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Battery Paper iFrame screenshot.png" height="252" width="480" alt="Screenshot of the iframe for my Chem Paper in This Page's Code" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/This Page Section Screenshot.png" height="252" width="480" alt="Screenshot of the This Page Section of This Page's Code" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/SCSS File Screenshot.png" height="251" width="480" alt="Screenshot of the SCSS File of This Page's Code" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Github Screenshot.png" height="222" width="480" alt="Screenshot of the GitHub Page for This Page" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Latest Commit Screenshot.png" height="224" width="480" alt="Screenshot of the Latest Commit to This Page's Code" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Commit Frequency.png" height="195" width="638" alt="Screenshot of the Commit Frequency for This Page" align="middle"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <p>
     To apply for your internship, I created this portflio. However, I did not want it to be a boring, typical portfolio,
     so I designed the whole thing using GitHub Pages, which allows you to have one free webpage per GitHub account.
     This meant that I had to learn website programming, which I had never done before. Creating the typical HTML elements
     was quite easy; the real challenge started with using CSS and Javascript to style my webpage, such as creating
-    the image carousels and the button that toggles the paper I wrote on batteries.
+    the image carousels and the button that toggles the paper I wrote on batteries. However, through documentation
+    online I was able to figure these elements out and make my webpage more interesting. P.S. I know VSCode says there's
+    an error in the style.scss file, but there is not, the part that is raising an error is what allows the webpage to
+    access the file.
 </p>
 
 </body>
