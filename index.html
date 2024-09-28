@@ -266,8 +266,9 @@
         </div>
     </div>
 </section>
-
-<button class="button button1" onclick="toggleIframe()" id="toggleButton" style="justify-content: center;">View Paper</button>
+<div style="justify-content: center;">
+    <button class="button button1" onclick="toggleIframe()" id="toggleButton">View Paper</button>
+</div>
 
 <div id="iframeContainer" style="display: none; justify-content: center; text-align: center;">
     <iframe src="docs/assets/AP Chem Final Project.pdf" title="AP Chem Final Paper" height="960" width="720" align="middle"></iframe>
@@ -280,10 +281,10 @@
 
         if (iframeContainer.style.display === "none") {
             iframeContainer.style.display = "block";
-            button.innerText = "Hide Content";
+            button.innerText = "Hide Paper";
         } else {
             iframeContainer.style.display = "none";
-            button.innerText = "View Content";
+            button.innerText = "View Paper";
         }
     }
 </script>
