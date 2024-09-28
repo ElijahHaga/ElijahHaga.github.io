@@ -62,6 +62,20 @@
         height: auto; /* Keep the aspect ratio */
         object-fit: contain; /* Ensure images don't overflow */
     }
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button1 {
+        background-color: #ffffff;
+    }
 </style>
 </head>
 
@@ -253,7 +267,7 @@
     </div>
 </section>
 
-<button onclick="toggleIframe()" id="toggleButton">View Paper</button>
+<button class="button button1" onclick="toggleIframe()" id="toggleButton">View Paper</button>
 
 <div id="iframeContainer" style="display: none; justify-content: center; text-align: center;">
     <iframe src="docs/assets/AP Chem Final Project.pdf" title="AP Chem Final Paper" height="960" width="720" align="middle"></iframe>
