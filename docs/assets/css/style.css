@@ -26,10 +26,10 @@ section {
 
 .hidden {
     opacity: 0;
-    transition: all 10s;
+    transition: all 1s;
 }
 
 .show {
     opacity: 1;
-    transition: all 10s;
+    transition: all 1s;
 }
