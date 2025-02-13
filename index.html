@@ -87,90 +87,85 @@
 </head>
 
 <body style="background-color: #0f0f0f">
-<div>
-    <section class="hidden">
-        <h1>
-            <font color="white">
-                Elijah Haga
-            <font>
-        </h1>
-    </section>
+<div class="hidden">
+    <h1>
+        <font color="white">
+            Elijah Haga
+        <font>
+    </h1>
 </div>
 
-<div>
-    <section class="hidden">
-        <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
-    </section>
 
-    <section style="text-align:center;" class="hidden">
-        <p>
-            <font size="5" color="white" style="text-align: center;">
-                <b>
-                    Electrical Engineering Portfolio
-                </b>
-            </font>
-        </p>
-    </section>
-
-    <section class="hidden">
-        <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
-    </section>
+<div class="hidden">
+    <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
 </div>
 
-<div>
-    <section class="hidden">
-        <p>
-            <font size="5" color="white">
-                <b>
-                    Gameboy Color Cartridge
-                </b>
-            </font>
-        </p>
-    </section>
+<div style="text-align:center;" class="hidden">
+    <p>
+        <font size="5" color="white" style="text-align: center;">
+            <b>
+                Electrical Engineering Portfolio
+            </b>
+        </font>
+    </p>
+</div>
 
-    <section id="carousel-gameboy-color-cartridge" class="splide" aria-label="Gameboy Color Cartridge" class="hidden">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    <li class="splide__slide">
-                        <img src="docs/assets/Gameboy Color Cartridge 3D Corner.png" height="450" width="629" alt="Gameboy Color Cartridge 3D Corner" align="middle"/>
-                    </li>
-                    <li class="splide__slide">
-                        <img src="docs/assets/Gameboy Color Cartridge 3D Front.png" height="466" width="398" alt="Gameboy Color Cartridge Front 3D Layout" align="middle"/>
-                    </li>
-                    <li class="splide__slide">
-                        <img src="docs/assets/Gameboy Color Cartridge 3D Back.png" height="518" width="440" alt="Gameboy Color Cartridge Back 3D Layout" align="middle"/>
-                    </li>
-                    <li class="splide__slide">
-                        <img src="docs/assets/Gameboy Color Cartridge 2D Front Layout.png" height="468" width="404" alt="Gameboy Color Cartridge Front 2D Layout" align="middle"/>
-                    </li>
-                    <li class="splide__slide">
-                        <img src="docs/assets/Gameboy Color Cartridge 2D Back Layout.png" height="441" width="375" alt="Gameboy Color Cartridge Back 2D Layout" align="middle"/>
-                    </li>
-                    <li class="splide__slide">
-                        <img src="docs/assets/Gameboy Color Cartridge Schematic.png" height="533" width="671" alt="Gameboy Color Cartridge Schematic" align="middle"/>
-                    </li>
-                </ul>
-            </div>
+<div class="hidden">
+    <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
+</div>
+
+<div class="hidden">
+    <p>
+        <font size="5" color="white">
+            <b>
+                Gameboy Color Cartridge
+            </b>
+        </font>
+    </p>
+</div>
+
+<section id="carousel-gameboy-color-cartridge" class="splide" aria-label="Gameboy Color Cartridge" class="hidden">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 3D Corner.png" height="450" width="629" alt="Gameboy Color Cartridge 3D Corner" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 3D Front.png" height="466" width="398" alt="Gameboy Color Cartridge Front 3D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 3D Back.png" height="518" width="440" alt="Gameboy Color Cartridge Back 3D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 2D Front Layout.png" height="468" width="404" alt="Gameboy Color Cartridge Front 2D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge 2D Back Layout.png" height="441" width="375" alt="Gameboy Color Cartridge Back 2D Layout" align="middle"/>
+                </li>
+                <li class="splide__slide">
+                    <img src="docs/assets/Gameboy Color Cartridge Schematic.png" height="533" width="671" alt="Gameboy Color Cartridge Schematic" align="middle"/>
+                </li>
+            </ul>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="hidden">
-        <p>
-            This PCB is a Gameboy Color Cartridge circuit board that I reverse-engineered. I researched the parts in the
-            original cartridges, recreated them in modern 3D models and footprints, and arranged them in the same positions
-            they were in in the original cartridges, but I routed the traces and placed the copper pour to my own design.
-            It uses an MBC5 chip to map storage to an MX23C8005-12 read-only memory (ROM) to store the game files, and a
-            W24257S-70LL random access memory (RAM) chip to store the save states for the player. It also has a MM1134A
-            as a backup IC. It interfaces with the Gameboy Color using a 32-pin card edge slot. I used Altium Designer
-            and the <a href="https://github.com/issus/altium-library" target="_blank">Celestial Altium Library</a>,
-            a free online library of components for the simpler electronics of the circuit board (like capacitors and resistors),
-            although I designed the main chips of the board myself. This was another project that I did to improve my ECAD
-            skills and to practice reverse engineering of circuit boards.
-        </p>
-    </section>
+<div class="hidden">
+    <p>
+        This PCB is a Gameboy Color Cartridge circuit board that I reverse-engineered. I researched the parts in the
+        original cartridges, recreated them in modern 3D models and footprints, and arranged them in the same positions
+        they were in in the original cartridges, but I routed the traces and placed the copper pour to my own design.
+        It uses an MBC5 chip to map storage to an MX23C8005-12 read-only memory (ROM) to store the game files, and a
+        W24257S-70LL random access memory (RAM) chip to store the save states for the player. It also has a MM1134A
+        as a backup IC. It interfaces with the Gameboy Color using a 32-pin card edge slot. I used Altium Designer
+        and the <a href="https://github.com/issus/altium-library" target="_blank">Celestial Altium Library</a>,
+        a free online library of components for the simpler electronics of the circuit board (like capacitors and resistors),
+        although I designed the main chips of the board myself. This was another project that I did to improve my ECAD
+        skills and to practice reverse engineering of circuit boards.
+    </p>
 </div>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         <font size="5" color="white">
             <b>
@@ -178,7 +173,7 @@
             </b>
         </font>
     </p>
-</section>
+</div>
 
 <section id="carousel-led-ring" class="splide" aria-label="LED Ring PCB Photos" class="hidden">
         <div class="splide__track">
@@ -203,7 +198,7 @@
     </div>
 </section>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         This circuit board is an LED ring PCB that I designed in <a href="https://www.flux.ai/" target="_blank">Flux</a>,
         a free browser-based ECAD. It uses an STM32F030CCT6 microcontroller and a BMI160 6-axis gyroscope to control 20
@@ -212,9 +207,9 @@
         learning how to use Flux. I prefer Altium Designer, but I used Flux to see how well I could adapt my
         skills to a completely different ECAD.
     </p>
-</section>
+</div>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         <font size="5" color="white">
             <b>
@@ -222,7 +217,7 @@
             </b>
         </font>
     </p>
-</section>
+</div>
 
 <section id="carousel-raspberry-pi-pico" class="splide" aria-label="Raspberry Pi Pico Images">
     <div id="rectangle">
@@ -251,7 +246,7 @@
     </div>
 </section>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         This circuit board is a clone of a Raspberry Pi Pico that I designed to improve my ECAD skills. I used Altium
         Designer and the <a href="https://github.com/issus/altium-library" target="_blank">Celestial Altium Library</a>
@@ -260,13 +255,13 @@
         operating system and Python. This was my first project in computer/control boards, which is the board design I
         like most.
     </p>
-</section>
+</div>
 
-<section class="hidden">
+<div class="hidden">
     <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
-</section>
+</div>
 
-<section style="text-align: center;">
+<div style="text-align: center;">
     <p>
         <font size="5" color="white">
             <b>
@@ -274,13 +269,13 @@
             </b>
         </font>
     </p>
-</section>
+</div>
 
-<section class="hidden">
+<div class="hidden">
     <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>
-</section>
+</div>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         <font size="5" color="white">
             <b>
@@ -288,15 +283,15 @@
             </b>
         </font>
     </p>
-</section>
+</div>
 
-<section style="text-align: center;" class="hidden"> <!--Creates the toggle paper button, centered in the middle of the webpage-->
+<div style="text-align: center;" class="hidden"> <!--Creates the toggle paper button, centered in the middle of the webpage-->
     <button class="button button1" onclick="toggleIframe()" id="toggleButton">View Paper</button>
-</section>
+</div>
 
-<section id="iframeContainer" style="display: none; justify-content: center; text-align: center;" class="hidden">
+<div id="iframeContainer" style="display: none; justify-content: center; text-align: center;" class="hidden">
     <iframe src="docs/assets/AP Chem Final Project.pdf" title="AP Chem Final Paper" height="960" width="720" align="middle"></iframe>
-</section> <!--Defines the iframe of the paper-->
+</div> <!--Defines the iframe of the paper-->
 
 <script>
     function toggleIframe() { /* The function to toggle the Li-ion battery paper */
@@ -313,7 +308,7 @@
     }
 </script>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         For my final project in AP Chem, I chose to research and fabricate a lithium-ion battery using the materials in
         my high school's lab to get a better understanding of how Lithium-ion batteries work. I only had a month to complete this assignment, so I could not document much of the
@@ -333,9 +328,9 @@
         the battery caught on fire, likely due to the anode and cathode powders spilling over the separator and shorting
         together. Although the battery had to be destroyed, it proved successful in discharging for a short period.
     </p>
-</section>
+</div>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         <font size="5" color="white">
             <b>
@@ -343,7 +338,7 @@
             </b>
         </font>
     </p>
-</section>
+</div>
 
 <section id="carousel-this-page" class="splide" aria-label="Images of This Page's Development" class="hidden">
     <div id="rectangle">
@@ -375,7 +370,7 @@
     </div>
 </section>
 
-<section class="hidden">
+<div class="hidden">
     <p>
         I created this portfolio to apply for your internship. However, I did not want it to be a boring, typical portfolio,
         so I designed the whole thing using GitHub Pages, which allows you to have one free webpage per GitHub account.
@@ -386,7 +381,7 @@
         an error in the style.scss file, but there is not, the part that is raising an error is what allows the webpage to
         access the file.
     </p>
-</section>
+</div>
 
 </body>
 </html>
