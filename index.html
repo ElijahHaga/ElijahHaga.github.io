@@ -13,80 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elijah Haga's Portfolio</title>
 
-<script>
-    /* Initializing all of the carousel functions, 2 images will appear per slide if possible */
-    document.addEventListener( 'DOMContentLoaded', function () {
-        new Splide( '#carousel-led-ring', {
-		    perPage: 2, breakpoints: {640: {perPage: 1,},},
-        } ).mount();
-    } );
-    document.addEventListener( 'DOMContentLoaded', function () {
-        new Splide( '#carousel-raspberry-pi-pico', {
-		    perPage: 2, breakpoints: {640: {perPage: 1,},},
-        } ).mount();
-    } );
-    document.addEventListener( 'DOMContentLoaded', function () {
-        new Splide( '#carousel-gameboy-color-cartridge', {
-		    perPage: 2, breakpoints: {640: {perPage: 1,},},
-        } ).mount();
-    } );
-    document.addEventListener( 'DOMContentLoaded', function () {
-        new Splide( '#carousel-this-page', {
-		    perPage: 2, breakpoints: {640: {perPage: 1,},},
-        } ).mount();
-    } );
-</script>
-
-<style>
-    #rectangle {
-        background: #0f0f0f; /* Make the rectangle blend in with the background color */
-        padding: 20px;
-        margin: 20px auto;
-        max-width: 90%; /* Ensure rectangle adapts to the width of the viewport */
-    }
-
-    /* Carousel styling */
-    #image-carousel {
-        max-width: 100%; /* Allow the carousel to take up available space */
-        overflow: hidden;
-    }
-
-    .splide__track {
-        overflow: hidden; /* Prevent the images from overlapping in the splides */
-    }
-
-    .splide__slide {
-        min-width: 50%; /* Ensures that at least two slides are visible per page */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .splide__slide img {
-        max-width: 100%; /* Ensure the image fits the slide */
-        height: auto; /* Keep the aspect ratio */
-        object-fit: contain; /* Ensure images don't overflow */
-    }
-
-    .button {
-        border: none;
-        color: #0f0f0f;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 14px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-
-    .button1 {
-        background-color: #ffffff;
-    }
-</style>
 </head>
 
-<body style="background-color: #0f0f0f">
+<body>
 <div class="hidden" style="text-align:center;">
     <h1>
         <font color="white">
@@ -94,7 +23,6 @@
         </font>
     </h1>
 </div>
-
 
 <div>
     <hr noshade size="4" color="#DEE4E1" width="95%" align="center"/>

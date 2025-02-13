@@ -28,3 +28,49 @@ body {
     opacity: 1;
     transition: all 1s;
 }
+
+#rectangle {
+    background: #0f0f0f; /* Make the rectangle blend in with the background color */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 90%; /* Ensure rectangle adapts to the width of the viewport */
+}
+
+/* Carousel styling */
+#image-carousel {
+    max-width: 100%; /* Allow the carousel to take up available space */
+    overflow: hidden;
+}
+
+.splide__track {
+    overflow: hidden; /* Prevent the images from overlapping in the splides */
+}
+
+.splide__slide {
+    min-width: 50%; /* Ensures that at least two slides are visible per page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.splide__slide img {
+    max-width: 100%; /* Ensure the image fits the slide */
+    height: auto; /* Keep the aspect ratio */
+    object-fit: contain; /* Ensure images don't overflow */
+}
+
+.button {
+    border: none;
+    color: #0f0f0f;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: #ffffff;
+}
