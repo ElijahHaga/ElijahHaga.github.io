@@ -7,7 +7,11 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.remove('show');
         }
     });
-});
+},  { threshold: 0.2 });
 
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
+
+document.addEventListener("DOMContentLoaded", () => {
+    hiddenElements.forEach((el) => observer.observe(el));
+});
