@@ -12,11 +12,6 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
-document.addEventListener("DOMContentLoaded", function () {
-    ["carousel-led-ring", "carousel-raspberry-pi-pico", "carousel-gameboy-color-cartridge", "carousel-this-page"].forEach(id => {
-        new Splide(`#${id}`, {
-            perPage: 2,
-            breakpoints: { 640: { perPage: 1 } },
-        }).mount();
-    });
+document.addEventListener("DOMContentLoaded", () => {
+    hiddenElements.forEach((el) => observer.observe(el));
 });
