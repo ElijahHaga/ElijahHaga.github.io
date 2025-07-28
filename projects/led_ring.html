@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Importing some libraries that make the splides work--->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://elijahhaga.github.io/docs/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <script defer src="https://elijahhaga.github.io/app.js"></script>
+
+    <!--This helps define the webpage-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="hidden">
+        <p>
+            <font size="5" color="white">
+                <b>
+                    LED Ring Circuit Board
+                </b>
+            </font>
+        </p>
+    </div>
+
+    <div class="hidden">
+        <div id="carousel-led-ring" class="splide" aria-label="LED Ring PCB Photos" class="hidden">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/LED Ring Corner 3D.png" height="338" width="473" alt="LED Ring 3D Corner" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/LED Ring Front 3D.png" height="461" width="461" alt="LED Ring Front 3D Layout" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/LED Ring Back 3D.png" height="458" width="458" alt="LED Ring Back 3D Layout" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/LED Ring Front 2D.png" height="443" width="450" alt="LED Ring Front 2D Layout" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/LED Ring PCB Schematic.png" height="609" width="699" alt="LED Ring Schematic" align="middle"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden">
+        <p>
+            <font size="3" color="white">
+                This circuit board is an LED ring PCB that I designed in <a href="https://www.flux.ai/" target="_blank">Flux</a>,
+                a free browser-based ECAD. It uses an STM32F030CCT6 microcontroller and a BMI160 6-axis gyroscope to control 20
+                LEDs depending on the orientation of the circuit board. It is charged and programmed by a USB-C port. I thought
+                of, researched, and designed this circuit board completely on my own, doing my own parts selection and BOM while
+                learning how to use Flux. I prefer Altium Designer, but I used Flux to see how well I could adapt my
+                skills to a completely different ECAD.
+            </font>
+        </p>
+    </div>
+</body>
+</html>
