@@ -1,3 +1,15 @@
+@media (max-width: 700px) {
+  .project-card {
+    width: 90%;
+  }
+
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
 body, html {
     margin: 1%;
     padding: 0;
@@ -77,11 +89,11 @@ body {
     text-decoration: none;
     border-radius: 8px;
     overflow: hidden;
-    width: 300px;                   /* You can adjust size here */
+    width: 500px;                   /* You can adjust size here */
+    height: 500px;
     margin: 20px auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 20px aqua;
 }
 
 .project-card:hover {
@@ -91,8 +103,8 @@ body {
 
 .project-card img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 350px;
+    object-fit: cover;
     display: block;
 }
 
@@ -101,4 +113,13 @@ body {
     font-size: 16px;
     font-weight: 600;
     text-align: center
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;     /* Center the cards */
+    gap: 20px;                   /* Space between cards */
+    flex-wrap: wrap;             /* Wrap on small screens */
+    margin: 40px auto;
+    max-width: 1000px;           /* Optional: limit container width */
 }
