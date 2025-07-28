@@ -68,24 +68,6 @@ body {
     background-color: #ffffff;
 }
 
-#rectangle {
-    background: #2e2d2d;       /* Dark background */
-    padding: 20px;             /* Inner spacing */
-    margin: 20px auto;         /* Center horizontally with vertical margin */
-    max-width: 90%;            /* Responsive width */
-    display: block;            /* Make it act like a block-level button */
-    text-align: center;        /* Center the text inside */
-    color: white;              /* Text color */
-    text-decoration: none;     /* Remove underline */
-    border-radius: 12px;       /* Rounded corners */
-    font-size: 18px;           /* Readable text */
-    transition: background 0.3s ease; /* Smooth hover effect */
-}
-
-#rectangle:hover {
-    background: #5a5a5a;       /* Slightly lighter on hover */
-}
-
 .project-card {
     display: flex;
     flex-direction: column;
@@ -99,7 +81,7 @@ body {
     margin: 20px auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 2px aqua;
+    border: 20px aqua;
 }
 
 .project-card:hover {
@@ -110,7 +92,7 @@ body {
 .project-card img {
     width: 100%;
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
 }
 
