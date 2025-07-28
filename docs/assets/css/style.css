@@ -76,7 +76,7 @@ body {
 }
 
 #rounded_rectangle {
-    background: #0f0f0f;       /* Dark background */
+    background: #373737;       /* Dark background */
     padding: 20px;             /* Inner spacing */
     margin: 20px auto;         /* Center horizontally with vertical margin */
     max-width: 90%;            /* Responsive width */
