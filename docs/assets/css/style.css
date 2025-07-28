@@ -29,13 +29,6 @@ body {
     transition: all 1s;
 }
 
-#rectangle {
-    background: #0f0f0f; /* Make the rectangle blend in with the background color */
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 90%; /* Ensure rectangle adapts to the width of the viewport */
-}
-
 /* Carousel styling */
 #image-carousel {
     max-width: 100%; /* Allow the carousel to take up available space */
@@ -75,8 +68,8 @@ body {
     background-color: #ffffff;
 }
 
-#rounded_rectangle {
-    background: #373737;       /* Dark background */
+#rectangle {
+    background: #2e2d2d;       /* Dark background */
     padding: 20px;             /* Inner spacing */
     margin: 20px auto;         /* Center horizontally with vertical margin */
     max-width: 90%;            /* Responsive width */
@@ -89,6 +82,37 @@ body {
     transition: background 0.3s ease; /* Smooth hover effect */
 }
 
-#rounded_rectangle:hover {
-    background: #1a1a1a;       /* Slightly lighter on hover */
+#rectangle:hover {
+    background: #5a5a5a;       /* Slightly lighter on hover */
+}
+
+.project-card {
+    display: block;
+    background: #1e1e1e;          /* Dark but distinct from background */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;           /* Small corner radius */
+    overflow: hidden;            /* Ensures corners apply to image too */
+    width: 300px;                /* Card size */
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);  /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;           /* Make image fill but stay proportional */
+    display: block;
+}
+
+.project-title {
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
 }
