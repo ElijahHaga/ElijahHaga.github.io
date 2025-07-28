@@ -74,3 +74,21 @@ body {
 .button1 {
     background-color: #ffffff;
 }
+
+#rounded_rectangle {
+    background: #0f0f0f;       /* Dark background */
+    padding: 20px;             /* Inner spacing */
+    margin: 20px auto;         /* Center horizontally with vertical margin */
+    max-width: 90%;            /* Responsive width */
+    display: block;            /* Make it act like a block-level button */
+    text-align: center;        /* Center the text inside */
+    color: white;              /* Text color */
+    text-decoration: none;     /* Remove underline */
+    border-radius: 12px;       /* Rounded corners */
+    font-size: 18px;           /* Readable text */
+    transition: background 0.3s ease; /* Smooth hover effect */
+}
+
+#rounded_rectangle:hover {
+    background: #1a1a1a;       /* Slightly lighter on hover */
+}
