@@ -93,7 +93,7 @@ body {
     text-decoration: none;
     border-radius: 8px;           /* Small corner radius */
     overflow: hidden;            /* Ensures corners apply to image too */
-    width: 300px;                /* Card size */
+    width: 200px;                /* Card size */
     margin: 20px auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);  /* Soft shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
