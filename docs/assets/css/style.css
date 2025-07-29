@@ -128,5 +128,12 @@ body {
   overflow: visible !important;
   vertical-align: text-bottom;
   fill: currentColor;
-  color:green;
+}
+
+.octicon-check-circle-full {
+    color:green;
+}
+
+.octicon-check-circle {
+    color: #545454;
 }
