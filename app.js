@@ -15,11 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
-    ["carousel-vesc", "carousel-motor-controller", "carousel-chainsaw-massacre", "carousel-tof-board", "carousel-led-ring", "carousel-raspberry-pi-pico", "carousel-gameboy-color-cartridge", "carousel-this-page"].forEach(id => {
-        new Splide(`#${id}`, {
-            perPage: 2,
-            breakpoints: { 640: { perPage: 1 } },
-        }).mount();
+    ["carousel-vesc", "carousel-motor-controller", "carousel-chainsaw-massacre", "carousel-tof-board", "carousel-this-page"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            new Splide(el, {
+                perPage: 2,
+                breakpoints: { 640: { perPage: 1 } },
+            }).mount();
+        }
     });
 
     document.getElementById("toggleButton").addEventListener("click", function () {
