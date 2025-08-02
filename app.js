@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
-    ["carousel-led-ring", "carousel-raspberry-pi-pico", "carousel-gameboy-color-cartridge", "carousel-this-page"].forEach(id => {
+    ["carousel-vesc", "carousel-motor-controller", "carousel-chainsaw-massacre", "carousel-tof-board", "carousel-led-ring", "carousel-raspberry-pi-pico", "carousel-gameboy-color-cartridge", "carousel-this-page"].forEach(id => {
         new Splide(`#${id}`, {
             perPage: 2,
             breakpoints: { 640: { perPage: 1 } },
