@@ -120,17 +120,17 @@ body {
     max-width: 1400px;           /* Optional: limit container width */
 }
 
-.octicon {
+.checkmark {
   display: inline-block;
   overflow: visible !important;
   vertical-align: text-bottom;
   fill: currentColor;
 }
 
-.octicon-check-circle-full {
+.checkmark-check-circle-full {
     color:green;
 }
 
-.octicon-check-circle {
+.checkmark-check-circle {
     color: #545454;
 }
