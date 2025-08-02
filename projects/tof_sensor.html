@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Importing some libraries that make the splides work--->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://elijahhaga.github.io/docs/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <script defer src="https://elijahhaga.github.io/app.js"></script>
+
+    <!--This helps define the webpage-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="hidden">
+        <p>
+            <font size="5" color="white">
+                <b>
+                    Time of Flight Sensor Board
+                </b>
+            </font>
+        </p>
+    </div>
+
+    <hr noshade size="4" color="#DEE4E1" width="95%" align="center" class="hidden"/>
+
+    <div class="hidden">
+        <div id="carousel-led-ring" class="splide" aria-label="TOF Board Pictures" class="hidden">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/TOF Sensor 3D Corner.png" height="475" width="475" alt="VESC 3D Corner" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/TOF Sensor 3D Front.png" height="475" width="475" alt="VESC 3D Front" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/TOF Sensor 3D Back.png" height="475" width="475" alt="VESC 3D Back" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/TOF Sensor 2D Layout Front" height="600" width="600" alt="VESC STM32 Schematic" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/TOF Sensor 2D Layout Back.png" height="600" width="600" alt="VESC nRF52832 Schematic" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/TOF Sensor Schematic.png" height="600" width="600" alt="VESC nRF52832 Schematic" align="middle"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden">
+        <p>
+            <font size="3" color="white">
+                I designed this time of flight sensor board for my internship at Adom Industries over the summer for use in the 
+                design of their autonomous robot shuttles. It uses the <a href="https://estore.st.com/en/vl53l8cxv0gc-1-cpn.html">
+                VL53L8CXV0GC/1</a> time of flight sensor from STMicroelectronics in SPI mode to communicate with the main robot computer, 
+                a Raspberry Pi 4 running ROS2. I used to to help determine the height of the lift mechanism on the robot shuttle, 
+                which used a scissor lift to retrieve items from shelves in a warehouse. The circuit board has to include a level shifter 
+                because the VL53L8CXV0GC/1 operates on +1.8V while the logic from the Raspberry Pi is +3.3V.
+            </font>
+        </p>
+    </div>
+</body>

@@ -26,6 +26,8 @@
         </p>
     </div>
 
+    <hr noshade size="4" color="#DEE4E1" width="95%" align="center" class="hidden"/>
+
     <div class="hidden">
         <div id="carousel-led-ring" class="splide" aria-label="LED Ring PCB Photos" class="hidden">
             <div class="splide__track">
@@ -65,11 +67,12 @@
                 This is a motor controller I deisgned at my internship this summer at Adom Industries. I was put in charge of 
                 designing the electronics system for the autonomous robot shuttles the company needed, and one of circuit boards 
                 I designed for this project was a motor controller board. It can handle 30 Amps at 60 Volts, and is capable of using 
-                either the built-in magnetic rotary encoder or an external encoder that uses SPI or I2C. It can communicate over CAN 
-                using CAN-FD to recieve commands for the motor. I designed the board to be able to use some open-source firmware, but the company 
-                I was interning for wanted the entire project to be built in-house to make sure we wouldn't have to open source company IP, 
-                so I wrote the firmware for this board myself in C. This gave me a lot of experience programming firmware in C and flashing my built files to the STM32.
-            </font>
+                either the built-in magnetic rotary encoder or an external encoder that uses SPI or I2C as feedback for the motor. 
+                It can communicate over CAN using CAN-FD to recieve commands for the motor and flash firmware, once the inital 
+                bootloader is flashed. I designed the board to be able to use some open-source firmware, but the company I was 
+                interning for wanted the entire project to be built in-house to make sure we wouldn't have to open source company IP, 
+                so I wrote the firmware for this board myself in C. This gave me a lot of experience programming firmware in C and 
+                flashing my built files to the STM32.
         </p>
     </div>
 </body>
