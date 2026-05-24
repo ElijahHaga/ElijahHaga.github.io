@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://elijahhaga.github.io/docs/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <script defer src="https://elijahhaga.github.io/app.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net">
+    <script type="module" src="https://pyscript.net"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="hidden">
+        <p>
+            <font size="5" color="white">
+                <b>
+                    High Frequency RF Power Sensor Project
+                </b>
+            </font>
+        </p>
+    </div>
+
+    <hr noshade size="4" color="#DEE4E1" width="95%" align="center" class="hidden" style="margin-bottom:40px; margin-top:10px"/>
+
+    <div id="iframeContainer" style="justify-content: center; text-align: center;" class="hidden">
+        <iframe src="docs/assets/6_2600_Antenna_coupled_Schottky_Diode_Final_Paper.pdf" title="High Frequency RF Power Sensor Report" height="960" width="720" align="middle"></iframe>
+    </div>
+
+    <div class="hidden" style="margin-top:20px">
+        <p>
+            <font size="3" color="white">
+                This is a report that my team and I made for our final project for 6.2600, a class on micro- and nano-fabrication 
+                at MIT. The class covers the physics and processes behind micro- and nano-fabrication, including photolithography, 
+                etching, deposition, and doping. For our final project, I designed a high frequency (~65-100 GHz) RF power sensor using 
+                a Schottky diode coupled with an antenna. The Schottky diode rectifies any incident RF signal, and the output DC 
+                power should scale linearly with the input RF power. I designed the whole device using phidl and Python, testing 
+                the resulting output using KLayout. We then fabricated the device in the on-campus cleanroom, as described in the report. 
+                The wafer features three distinct antenna designs (a dual dipole, a folded dipole, and a resistively-tapered dipole) 
+                and sweeps different diode dimensions to test the effects of different parameters on the performance of the device.
+            </font>
+        </p>
+    </div>
+
+    <div class="hidden">
+        <div id="carousel-rf-power-sensor" class="splide" aria-label="RF Power Sensor Pictures">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img src="docs/assets/RF Power Sensor Final Wafer.jpg" height="500" width="500" alt="RF Power Sensor Final Wafer" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="docs/assets/RF Power Sensor Code.png" height="475" width="475" alt="RF Power Sensor Code" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="docs/assets/RF Power Sensor Ohmic Contact.jpg" height="475" width="475" alt="RF Power Sensor Ohmic Contact" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="docs/assets/RF Power Sensor Acid Bath.jpg" height="475" width="475" alt="RF Power Sensor Acid Bath" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="docs/assets/RF Power Sensor Ohmic Contact Plus Aluminum.jpg" height="475" width="475" alt="RF Power Sensor Ohmic Contact Plus Aluminum" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="docs/assets/RF Power Sensor Full Wafer Without Gold and Nickel.jpg" height="600" width="600" alt="RF Power Sensor Full Wafer Without Gold and Nickel" align="middle"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="py">
+        from phidl import Device
+        import phidl.geometry as pg
+        import math
+
+        ###################################################
+        # Layers
+        # 1 = diode body (Si etch mask)
+        # 2 = contacts (Schottky + Ohmic metal)
+        # 3 = antenna + metal overlay
+
+        ###################################################
+
+        ###################################################
+        # Diode Body
+        ###################################################
+        def diode_body(p):
+
+            D = Device("diode")
+
+            body_rect = pg.rectangle(
+                size=(p.body_width_1, p.body_width_1),
+                layer=1
+            )
+            
+            body_taper = D << pg.taper(
+                p.sd_triangle_length-2,
+                p.body_width_1,
+                p.body_width_2,
+                layer=1
+            )
+            
+            body_taper.move((p.body_width_1, p.body_width_1/2))
+
+            D << body_rect
+
+            return D
+
+        ###################################################
+        # Schottky Contact
+        ###################################################
+        def schottky_contact(p):
+
+            D = Device("schottky")
+
+            circle_contact = pg.circle(radius=p.sch_radius, layer=2) # Circular contact
+            circle_cutout1 = pg.circle(radius=p.sch_radius, layer=2) # Circular top cutout
+            circle_cutout2 = pg.circle(radius=p.sch_radius, layer=2) # Circular bottom cutout
+            
+            tri = pg.taper(
+                length=p.sd_triangle_length,
+                width1=p.sd_schottky_contact_h,
+                width2=p.sch_radius*2,
+                layer=2
+            ) # Tapered section
+
+            rect1 = pg.rectangle(
+                size=(p.sd_schottky_contact_w, p.sd_schottky_contact_h),
+                layer=2
+            ) # Main rectangle contact
+            
+            rect2 = pg.rectangle(
+                size=(p.schottky_contact_trace_l, p.schottky_contact_trace_w),
+                layer=2
+            ) # Rectangle connecting taper to circle
+
+            # Move shapes to correct position
+            circle_contact.move((p.schottky_contact_trace_l/2, 0))
+            circle_cutout1.move((6.5, p.sch_radius*7/4))
+            circle_cutout2.move((6.5, -p.sch_radius*7/4))
+            tri.move((-p.sd_triangle_length, 0))
+            rect1.move((-p.sd_triangle_length-p.sd_schottky_contact_w, -p.sd_schottky_contact_h/2))
+            rect2.move((-p.schottky_contact_trace_l/2, -p.schottky_contact_trace_w/2))
+
+            # Combine the shapes
+            sch = pg.boolean(rect1, tri, "A+B", layer=2)
+            sch = pg.boolean(sch, rect2, "A+B", layer=2)
+            sch = pg.boolean(sch, circle_contact, "A+B", layer=2)
+            if (p.sch_radius > 0.4):
+                sch = pg.boolean(sch, circle_cutout1, "A-B", layer=2)
+                sch = pg.boolean(sch, circle_cutout2, "A-B", layer=2)
+            
+            sch.move((p.body_width_1/2+7.25, p.body_width_1/2))
+
+            ref = D << sch
+
+            D.add_port(
+                name="sch_pad",
+                midpoint=(
+                    -p.sd_triangle_length - p.sd_schottky_contact_w/2,
+                    1
+                ),
+                width=p.sd_schottky_contact_h,
+                orientation=180
+            )
+
+            return D
+
+        ###################################################
+        # Ohmic Contact
+        ###################################################
+        def ohmic_contact(p):
+            D = Device("ohmic")
+            
+            tri = pg.taper(
+                length=p.sd_triangle_length, 
+                width1=p.sch_radius*2, 
+                width2=p.sd_schottky_contact_h, 
+                layer=3
+            )
+            rect1 = pg.rectangle(
+                size=(p.sd_schottky_contact_w, p.sd_schottky_contact_h), 
+                layer=3
+            )
+            
+            rect2 = pg.rectangle(size=(5, p.sd_schottky_contact_w), layer=3)
+            rect3 = pg.rectangle(size=(0.5, (p.sch_radius + p.metal_gap_offset)*2), layer=3)
+            hole = pg.circle(radius=p.sch_radius + p.metal_gap_offset, layer=3)
+            
+            taper_compass = pg.compass(size=(p.sd_schottky_contact_h, p.sd_triangle_length))
+
+            tri.move((0, p.body_width_1/2))
+            hole.move((p.hole_inset + 0.5, p.body_width_1/2))
+            rect1.move((p.sd_schottky_contact_w/2 - 5, (-p.sd_schottky_contact_h/2)+p.body_width_1*1/2))
+            rect2.move((-2, -7))
+            
+            taper_compass.center = tri.center
+            taper_compass.move((-3.75, 0))
+            
+            rect3.move(taper_compass.ports["W"].midpoint)
+            rect3.move((3.75, -(2.625 * p.body_width_1 - 2.75) / 2))
+
+            ohm_final = pg.boolean(
+                A=[tri, rect1], 
+                B=[rect2, hole, rect3], 
+                operation='A-B', 
+                layer=3
+            )
+            
+            ohm_final.move((-17.75, 0))
+            
+            ohm_final_ref = D << ohm_final
+
+            xmin = ohm_final_ref.bbox[0][0]
+            xmax = ohm_final_ref.bbox[1][0]
+            xmid = (xmin+xmax)/2
+            ymin = ohm_final_ref.bbox[0][1]
+            ymax = ohm_final_ref.bbox[1][1]
+            ymid = (ymin + ymax) / 2
+            
+            D.add_port(
+                name="ohm_pad",
+                midpoint=(xmid+5, ymid),
+                width=p.sd_schottky_contact_h,
+                orientation=0
+            )
+
+            return D
+
+        ###################################################
+        # Bond Pads + Routing
+        ###################################################
+        def add_bond_pads(p, sch_ref, ohm_ref, antenna_type, has_matching):
+
+            D = Device("bonding")
+            
+            pad_size = 100
+            trace_width = 5
+            if (antenna_type == "dual_dipole_antenna" and has_matching == False):
+                trace_length = 825
+            elif (antenna_type == "dual_dipole_antenna" and has_matching == True):
+                return D
+            else:
+                trace_length = 150
+            
+            # === SCHOTTKY SIDE ===
+            sch_trace = Device("sch_trace")
+
+            rect = sch_trace << pg.rectangle(
+                size=(trace_width, trace_length),
+                layer=2
+            )
+
+            # Add ports to trace
+            sch_trace.add_port(
+                name="in",
+                midpoint=(0, trace_width/2),
+                width=trace_width,
+                orientation=180
+            )
+            sch_trace.add_port(
+                name="out",
+                midpoint=(0, trace_length+pad_size/2),
+                width=trace_width,
+                orientation=0
+            )
+
+            sch_trace_ref = D << sch_trace
+            sch_trace_ref.connect("in", sch_ref.ports["sch_pad"])
+
+            # Pad
+            sch_pad = Device("sch_pad")
+
+            rect = sch_pad << pg.rectangle(
+                size=(pad_size, pad_size),
+                layer=2
+            )
+
+            sch_pad.add_port(
+                name="sch_pad",
+                midpoint=(0, pad_size/2+1),
+                width=trace_width,
+                orientation=180
+            )
+
+            sch_pad_ref = D << sch_pad
+            sch_pad_ref.connect("sch_pad", sch_trace_ref.ports["out"])
+
+            # === OHMIC SIDE ===
+            # =========================
+            ohm_trace = Device("ohm_trace")
+
+            rect = ohm_trace << pg.rectangle(
+                size=(trace_width, trace_length),
+                layer=2
+            )
+
+            ohm_trace.add_port(
+                name="in",
+                midpoint=(trace_width*3, trace_width/2),
+                width=trace_width,
+                orientation=0
+            )
+            ohm_trace.add_port(
+                name="out",
+                midpoint=(0, trace_width/2),
+                width=trace_width,
+                orientation=180
+            )
+
+            ohm_trace_ref = D << ohm_trace
+            ohm_trace_ref.connect("in", ohm_ref.ports["ohm_pad"])
+
+            # Pad
+            ohm_pad = Device("ohm_pad")
+
+            rect = ohm_pad << pg.rectangle(
+                size=(pad_size, pad_size),
+                layer=2
+            )
+
+            ohm_pad.add_port(
+                name="in",
+                midpoint=(pad_size-trace_width, -trace_length+3.5),
+                width=trace_width,
+                orientation=0
+            )
+
+            ohm_pad_ref = D << ohm_pad
+            ohm_pad_ref.connect("in", ohm_trace_ref.ports["out"])
+            
+            D.absorb(sch_trace_ref)
+            D.absorb(sch_pad_ref)
+            D.absorb(ohm_trace_ref)
+            D.absorb(ohm_pad_ref)
+
+            return D
+
+        ###################################################
+        # Resistively tapered antenna
+        ###################################################
+        def tapered_antenna(p, dimensions):
+            p.ant_length = dimensions[0]
+            p.ant_w1 = dimensions[1]
+            p.ant_w2 = dimensions[2]
+            p.ant_segments = dimensions[3]
+
+            D = Device("antenna")
+
+            seg_len = p.ant_length / p.ant_segments
+            x = 0
+
+            for i in range(p.ant_segments):
+
+                w1 = p.ant_w1 + (p.ant_w2 - p.ant_w1) * i / p.ant_segments
+                w2 = p.ant_w1 + (p.ant_w2 - p.ant_w1) * (i+1) / p.ant_segments
+
+                taper = D << pg.taper(
+                    length=seg_len,
+                    width1=w1,
+                    width2=w2,
+                    layer=3
+                )
+
+                taper.move((x,0))
+                x += seg_len
+
+            D.add_port(
+                name="feed",
+                midpoint=(0,0),
+                width=p.ant_w1,
+                orientation=180
+            )
+
+            return D
+
+        ###################################################
+        # Dual Dipole with Matching Network (75 GHz)
+        ###################################################
+        def dual_dipole_antenna(p, dimensions, has_matching=True):
+            p.dd_length = dimensions[0] # Dimension A
+            p.dd_dipole_arm_gap = dimensions[1] # Dimension B
+            p.dd_dipole_gap = dimensions[2] # Dimension C
+            p.dd_width = dimensions[3] # Dimension D
+            p.schottky_width = dimensions[4] # Dimension E
+            p.dd_trace_width = dimensions[5] # Dimension F
+            p.dd_matching_lengths = dimensions[6] # Dimension G
+            p.dd_matching_widths = dimensions[7] # Dimension H
+            
+            D = Device("dual_dipole")
+
+            # === FEED GAP ===
+            gap = p.dd_trace_width
+
+            # === CENTRAL FEED STRIPS ===
+            top_feed = pg.rectangle(
+                size=(p.dd_width, p.dd_dipole_arm_gap*2),
+                layer=3
+            )
+            
+            bot_feed = pg.rectangle(
+                size=(p.dd_width, p.dd_dipole_arm_gap*2),
+                layer=3
+            )
+            
+            top_feed_compass = pg.compass(
+                size=(p.dd_width, p.dd_dipole_arm_gap*2),
+                layer=3
+            )
+            
+            bot_feed_compass = pg.compass(
+                size=(p.dd_width, p.dd_dipole_arm_gap*2),
+                layer=3
+            )
+
+            top_feed.move((125.25, -p.dd_dipole_arm_gap-44.1))
+            top_feed_compass.move((125.25+p.dd_width/2, -44.1))
+            bot_feed.move((-p.dd_dipole_gap-p.dd_width+125.25, -p.dd_dipole_arm_gap-44.1))
+            bot_feed_compass.move((-225.25, -44.1))
+            
+            # === DIPOLE ARMS ===
+            
+            top_arm_dev1 = pg.rectangle(
+                size=((p.dd_length-p.dd_dipole_gap)/2, p.dd_width),
+                layer=3
+            )
+            top_arm_dev2 = pg.rectangle(
+                size=((p.dd_length-p.dd_dipole_gap)/2, p.dd_width),
+                layer=3
+            )
+            
+            bot_arm_dev1 = pg.rectangle(
+                size=((p.dd_length-p.dd_dipole_gap)/2, p.dd_width),
+                layer=3
+            )
+            bot_arm_dev2 = pg.rectangle(
+                size=((p.dd_length-p.dd_dipole_gap)/2, p.dd_width),
+                layer=3
+            )
+            
+            # Add ports to arms
+            top_arm_dev1.add_port(
+                name="top_in1",
+                midpoint=(0, (p.dd_length-p.dd_dipole_gap)/4+2*p.dd_width+20.5),
+                width=p.dd_dipole_arm_gap,
+                orientation=180
+            )
+            top_arm_dev2.add_port(
+                name="top_in2",
+                midpoint=(0, -((p.dd_length-p.dd_dipole_gap)/4+2*p.dd_width-40.5)),
+                width=p.dd_dipole_arm_gap,
+                orientation=180
+            )
+            
+            bot_arm_dev1.add_port(
+                name="bot_in1",
+                midpoint=(0, (p.dd_length-p.dd_dipole_gap)/4+2*p.dd_width+20.5),
+                width=p.dd_dipole_arm_gap,
+                orientation=180
+            )
+            bot_arm_dev2.add_port(
+                name="bot_in2",
+                midpoint=(0, -((p.dd_length-p.dd_dipole_gap)/4+2*p.dd_width-40.5)),
+                width=p.dd_dipole_arm_gap,
+                orientation=180
+            )
+            
+            contact_trace1 = D << pg.rectangle((125, p.sd_schottky_contact_h), layer=3)
+            contact_trace1.move((-204, -62.6))
+            contact_trace2 = D << pg.rectangle((125, p.sd_schottky_contact_h), layer=3)
+            contact_trace2.move((9.5, -62.6))
+            
+            # Instantiate references
+            top_arm1 = D << top_arm_dev1
+            top_arm2 = D << top_arm_dev2
+            bot_arm1 = D << bot_arm_dev1
+            bot_arm2 = D << bot_arm_dev2
+            
+            # Connect arms to feed
+            top_arm1.connect("top_in1", top_feed_compass.ports["E"])
+            top_arm2.connect("top_in2", top_feed_compass.ports["E"])
+            bot_arm1.connect("bot_in1", bot_feed_compass.ports["W"])
+            bot_arm2.connect("bot_in2", bot_feed_compass.ports["W"])
+            
+            # Absorb into D
+            D.absorb(top_arm1)
+            D.absorb(top_arm2)
+            D.absorb(bot_arm1)
+            D.absorb(bot_arm2)
+            
+            # # Instantiate REFERENCES
+            top_feed_ref = D << top_feed
+            bot_feed_ref = D << bot_feed
+
+            
+            # === LOW PASS FILTER ===
+            if (has_matching):
+                x_offset = p.dd_dipole_gap + p.dd_width
+                matching_parts = []
+            
+                for i in range(4):
+                    if ((i % 2) == 0):
+                        trace_top = D << pg.rectangle(size=(p.dd_matching_lengths, p.dd_trace_width), layer=3)
+                        trace_bot = D << pg.rectangle(size=(p.dd_matching_lengths, p.dd_trace_width), layer=3)
+                        
+                        trace_top.move((x_offset + i*p.dd_matching_lengths, gap/2 + p.dd_dipole_arm_gap + p.dd_matching_widths/2 - 794.35))
+                        trace_bot.move((x_offset + i*p.dd_matching_lengths, -gap/2 - p.dd_dipole_arm_gap - p.dd_matching_widths/2 + 715.65))
+                        
+                        matching_parts += [trace_top, trace_bot]
+                    else:
+                        block_top = D << pg.rectangle(size=(p.dd_matching_lengths, p.dd_matching_widths), layer=3)
+                        block_bot = D << pg.rectangle(size=(p.dd_matching_lengths, p.dd_matching_widths), layer=3)
+            
+                        block_top.move((x_offset + i*p.dd_matching_lengths, gap/2 + p.dd_dipole_arm_gap - 794.35))
+                        block_bot.move((x_offset + i*p.dd_matching_lengths, -gap/2 - p.dd_dipole_arm_gap - p.dd_matching_widths + 715.65))
+                        
+                        matching_parts += [block_top, block_bot]
+                matching_network = Device("matching_network")
+                for part in matching_parts:
+                    matching_network.add(part)
+                matching_network.rotate(-90)
+                matching_network.move((0, -423.1))
+            
+                # Add the whole network to main device
+                D.add(matching_network)
+
+            # === PORTS ===
+            D.add_port(
+                name="top_feed",
+                midpoint=(0, gap/2 + p.schottky_width/2),
+                width=p.schottky_width,
+                orientation=180
+            )
+
+            D.add_port(
+                name="bot_feed",
+                midpoint=(0, -gap/2 - p.schottky_width/2),
+                width=p.schottky_width,
+                orientation=180
+            )
+
+            return D
+
+        ###################################################
+        # Folded Dipole Antenna
+        ###################################################
+        def folded_dipole_antenna(p, dimensions):
+            p.ant_major_length = dimensions[0] # Length of the antenna feed lines
+            p.ant_width = dimensions[1] # Width of the antenna feed lines
+            p.ant_thickness = dimensions[2] # Thicnkess of the antenna pads
+            p.ant_gap = dimensions[3] # Gap between feed lines and pads
+            p.ant_secondary_length = dimensions[4] # Length of the pads
+            p.feed_line_length = ((p.ant_major_length-p.sd_schottky_contact_w*2-p.sd_triangle_length*2-p.body_length)/2)+1
+            p.arm_length = p.ant_width+p.ant_secondary_length+p.ant_gap
+            
+            D = Device("folded_dipole")
+
+            # === CENTRAL FEED STRIPS ===
+            right_feed = pg.rectangle(
+                size=(p.feed_line_length, p.ant_width),
+                layer=3
+            )
+            
+            left_feed = pg.rectangle(
+                size=(p.feed_line_length, p.ant_width),
+                layer=3
+            )
+            
+            right_feed_compass = pg.compass(
+                size=(p.feed_line_length, p.ant_width),
+                layer=3
+            )
+            
+            left_feed_compass = pg.compass(
+                size=(p.feed_line_length, p.ant_width),
+                layer=3
+            )
+
+            right_feed.move((p.sd_schottky_contact_w+p.sd_triangle_length-3.75,-p.sd_schottky_contact_h/2+1))
+            right_feed_compass.move((p.sd_schottky_contact_w+p.sd_triangle_length-3.75,-p.sd_schottky_contact_h/2+1))
+            left_feed.move((-p.feed_line_length-p.sd_schottky_contact_w-p.sd_triangle_length-p.body_length+4.25,-p.sd_schottky_contact_h/2+1))
+            left_feed_compass.move((-p.feed_line_length-p.sd_schottky_contact_w-p.sd_triangle_length-p.body_length+4.25,-p.sd_schottky_contact_h/2+1))
+            
+            # === DIPOLE ARMS (directly connected, no tapers) ===
+            
+            right_arm = pg.rectangle(
+                size=(p.ant_width, p.arm_length),
+                layer=3
+            )
+            left_arm = pg.rectangle(
+                size=(p.ant_width, p.arm_length),
+                layer=3
+            )
+            
+            right_arm_compass = pg.compass(
+                size=(p.ant_width, p.arm_length),
+                layer=3
+            )
+            left_arm_compass = pg.compass(
+                size=(p.ant_width, p.arm_length),
+                layer=3
+            )
+            
+            # Add ports to arms
+            right_arm.add_port(
+                name="right_in1",
+                midpoint=(-p.feed_line_length/2+p.ant_width, 0),
+                width=p.ant_width,
+                orientation=180
+            )
+            left_arm.add_port(
+                name="left_in1",
+                midpoint=(p.feed_line_length/2, 0),
+                width=p.ant_width,
+                orientation=180
+            )
+            
+            right_arm_compass.add_port(
+                name="right_compass_in1",
+                midpoint=(-p.feed_line_length/2+p.ant_width/2, -(p.arm_length)/2),
+                width=p.ant_width,
+                orientation=180
+            )
+            left_arm_compass.add_port(
+                name="left_compass_in1",
+                midpoint=(p.feed_line_length/2-p.ant_width/2, -(p.arm_length)/2),
+                width=p.ant_width,
+                orientation=180
+            )
+            
+            # # Instantiate references
+            right_arm = D << right_arm
+            left_arm = D << left_arm
+            right_arm_compass = D << right_arm_compass
+            left_arm_compass = D << left_arm_compass
+            
+            # Connect arms to feed
+            right_arm.connect("right_in1", right_feed_compass.ports["E"])
+            left_arm.connect("left_in1", left_feed_compass.ports["E"])
+            right_arm_compass.connect("right_compass_in1", right_feed_compass.ports["E"])
+            left_arm_compass.connect("left_compass_in1", left_feed_compass.ports["E"])
+            
+            # === ANTENNA PADS (connected to arms) ===
+            
+            right_pad = pg.rectangle(
+                size=(p.ant_secondary_length, p.ant_thickness),
+                layer=3
+            )
+            left_pad = pg.rectangle(
+                size=(p.ant_secondary_length, p.ant_thickness),
+                layer=3
+            )
+            
+            # Add ports to arms
+            right_pad.add_port(
+                name="right_in2",
+                midpoint=(0, p.arm_length/2),
+                width=p.ant_width,
+                orientation=180
+            )
+            left_pad.add_port(
+                name="left_in2",
+                midpoint=(0, (p.arm_length-p.ant_thickness)/2+3),
+                width=p.ant_thickness,
+                orientation=180
+            )
+            
+            # Instantiate references
+            right_pad = D << right_pad
+            left_pad = D << left_pad
+            
+            # Connect arms to feed
+            right_pad.connect("right_in2", right_arm_compass.ports["W"], overlap=1)
+            left_pad.connect("left_in2", left_arm_compass.ports["E"], overlap=1)
+            
+            # Absorb into D
+            D.absorb(right_pad)
+            D.absorb(left_pad)
+            
+            # # Instantiate REFERENCES
+            right_feed_ref = D << right_feed
+            left_feed_ref = D << left_feed
+
+            # === PORTS ===
+            D.add_port(
+                name="top_feed",
+                midpoint=(0, p.sd_schottky_contact_w/2),
+                width=p.sd_schottky_contact_w,
+                orientation=180
+            )
+
+            D.add_port(
+                name="bot_feed",
+                midpoint=(0, -p.sd_schottky_contact_w/2),
+                width=p.sd_schottky_contact_w,
+                orientation=180
+            )
+
+            return D
+
+        ###################################################
+        # Full diode device
+        ###################################################
+        def diode_device(p, antenna_type, dimensions, has_matching):
+
+            D = Device()
+
+            D << diode_body(p)
+
+            sch = D << schottky_contact(p)
+            ohm = D << ohmic_contact(p)
+
+            sch.move((-p.body_length*3/2,0))
+            ohm.move((p.body_length*3/2,0))
+            
+            if (antenna_type == "tapered_antenna"):
+                ant1 = D << tapered_antenna(p, dimensions)
+                ant2 = D << tapered_antenna(p, dimensions)
+                ant1.connect("feed", sch.ports["sch_pad"])
+                ant2.connect("feed", ohm.ports["ohm_pad"])
+            elif (antenna_type == "dual_dipole_antenna"):
+                antenna = D << dual_dipole_antenna(p, dimensions, has_matching)
+                antenna.connect("top_feed", sch.ports["sch_pad"], overlap=8)
+                antenna.connect("bot_feed", ohm.ports["ohm_pad"])
+            elif (antenna_type == "folded_dipole_antenna"):
+                antenna = D << folded_dipole_antenna(p, dimensions)
+                # antenna.connect("right_feed", sch.ports["sch_pad"])
+                # antenna.connect("left_feed", ohm.ports["ohm_pad"])
+
+            # === ADD BOND PADS ===
+            bonding = add_bond_pads(p, sch, ohm, antenna_type, has_matching)
+            D << bonding
+            return D
+
+        ###################################################
+        # Device outlines
+        ###################################################
+        def add_device_outline(parent, ref, dev_id, spacing, margin, layer=3):
+            """
+            Draws an outline and label around a device reference.
+
+            parent = wafer (Device)
+            ref = reference to device already placed
+            dev_id = integer label
+            spacing = grid spacing (used parametrically)
+            """
+
+            # === BOUNDING BOX ===
+            xmin, ymin = ref.bbox[0]
+            xmax, ymax = ref.bbox[1]
+
+            width = xmax - xmin
+            height = ymax - ymin
+
+            text_size = spacing * 0.15
+            outline_width = spacing * 0.01
+
+            outline = pg.rectangle(
+                size=(width + 2*margin, height + 2*margin),
+                layer=layer
+            )
+
+            outline_ref = parent << outline
+            outline_ref.move((xmin - margin, ymin - margin))
+
+            # === CONVERT TO OUTLINE ===
+            outline_path = pg.outline(outline, distance=outline_width, layer=layer)
+            outline_path_ref = parent << outline_path
+            outline_path_ref.move((xmin - margin, ymin - margin))
+
+            parent.remove(outline_ref)
+
+            # === DEVICE NUMBER ===
+            label = pg.text(
+                text=f"Device: {dev_id}",
+                size=text_size / 3,   # 1/3 size
+                layer=layer
+            )
+
+            label_ref = parent << label
+
+            label_width = label_ref.bbox[1][0] - label_ref.bbox[0][0]
+
+            label_ref.move((
+                xmin + (width - label_width)/2,
+                ymax + margin + outline_width
+            ))
+
+        ###################################################
+        # TLM Test Strip
+        ###################################################
+        def tlm_strip(spacings=None, contact_thickness=500, contact_length=3000, body_height=None):
+            """
+            Creates a TLM (Transfer Length Method) test structure.
+
+            spacings          : list of gaps between metal contacts in microns
+                                defaults to [500, 1000, 1500, 2000, 2500]
+            contact_thickness : height of each metal contact bar (layer 3), in microns
+            contact_length    : length of the silicon body and all contacts (layer 2), in microns
+            body_height       : height of the silicon body (layer 2)
+                                defaults to contact_thickness * 3
+            """
+
+            if spacings is None:
+                spacings = [500, 1000, 1500, 2000, 2500]
+
+            body_height = contact_length * 4
+
+            D = Device("tlm_strip")
+
+            n_contacts = len(spacings) + 1
+
+            # === SILICON BODY ===
+            body = pg.rectangle(
+                size=(body_height, contact_length),
+                layer=1
+            )
+            
+            body_ref = D << body
+
+            # === METAL CONTACTS ===
+            x_cursor = 0
+
+            for i in range(n_contacts):
+                contact = pg.rectangle(
+                    size=(contact_thickness, contact_length),
+                    layer=3
+                )
+                contact_ref = D << contact
+
+
+                contact_ref.move((x_cursor, 0))
+
+                if i < len(spacings):
+                    x_cursor += contact_thickness + spacings[i]
+
+            # === LABEL ===
+            label = pg.text(
+                text="TLM",
+                size=contact_thickness * 1.5,
+                layer=3
+            )
+            label_ref = D << label
+            label_w = label_ref.bbox[1][0] - label_ref.bbox[0][0]
+            label_ref.move((contact_length / 2 - label_w / 2, contact_length*5/4))
+
+            return D
+
+        ###################################################
+        # Alginment Crosses
+        ###################################################
+        def alignment_cross(size=50, arm_width=2, layer=1, location=0):
+            D = Device("align_cross")
+            
+            # Calculate lengths based on KOH etching characteristics
+            vertical_etch = 2.0
+            lateral_per_2p2 = 1.6
+            undercut = lateral_per_2p2 * (vertical_etch / 2.2)
+
+            comp_size = 2 * undercut
+
+            h = pg.rectangle(size=(size, arm_width), layer=layer)
+            v = pg.rectangle(size=(arm_width, size), layer=layer)
+
+            if location == 90:
+                h.move((-size, 0))
+            elif location == 180:
+                v.move((0, -size))
+            elif location == 270:
+                v.move((0, -size))
+                h.move((-size, 0))
+
+            cross = pg.boolean(h, v, "A+B", layer=layer)
+
+            squares = []
+
+            cx, cy = 0, 0
+
+            offsets = [
+                ( arm_width/2,  arm_width/2),
+                (-arm_width/2 - comp_size,  arm_width/2),
+                ( arm_width/2, -arm_width/2 - comp_size),
+                (-arm_width/2 - comp_size, -arm_width/2 - comp_size),
+            ]
+
+            for dx, dy in offsets:
+                sq = pg.rectangle(size=(comp_size, comp_size), layer=layer)
+                sq.move((dx, dy))
+                squares.append(sq)
+
+            comp = pg.boolean(cross, squares, "A+B", layer=layer)
+            
+            main_rect = pg.rectangle(size=(size/3, size/3), layer=layer)
+
+            if location == 90:
+                main_rect.move((-344.4444444,100))
+            elif location == 180:
+                main_rect.move((size/4, -size/2))
+            elif location == 270:
+                main_rect.move((-344.4444444,-344.4444444))
+            else:
+                main_rect.move((100,100))
+            comp = pg.boolean(comp, main_rect, "A+B", layer=layer)
+            return comp
+
+        ###################################################
+        # Vernier Alignment Mark
+        ###################################################
+        def vernier_mark(pitch=20, n_teeth=10, tooth_w=8, tooth_h=60, layer_a=1, layer_b=2, label_size=None):
+            """
+            Creates a Vernier-style alignment mark pair.
+
+            One comb on layer_a has teeth at 'pitch' spacing.
+            The other comb on layer_b has teeth at pitch*(n_teeth-1)/n_teeth spacing,
+            so each tooth is offset by pitch/n_teeth from its neighbor.
+            When perfectly aligned, the center teeth coincide. Each tooth away from
+            center that lines up instead = pitch/n_teeth of misalignment.
+
+            pitch      : spacing between teeth on the reference comb (µm)
+            n_teeth    : number of teeth per comb (odd number recommended)
+            tooth_w    : width of each tooth (µm)
+            tooth_h    : height of teeth (µm)
+            layer_a    : reference layer (e.g. layer 1, etch mask)
+            layer_b    : measurement layer (e.g. layer 2, contacts)
+            label_size : text size for tick labels, defaults to tooth_w * 1.5
+            """
+
+            if label_size is None:
+                label_size = tooth_w * 1.5
+
+            D = Device("vernier")
+
+            half = n_teeth // 2
+            pitch_b = pitch * (n_teeth - 1) / n_teeth
+
+            # === REFERENCE COMB ===
+            spine_h = tooth_w
+            spine_w = pitch * (n_teeth - 1) + tooth_w
+
+            spine_a = pg.rectangle(size=(spine_w, spine_h), layer=layer_a)
+            spine_a_ref = D << spine_a
+            spine_a_ref.move((-spine_w / 2 - tooth_w, tooth_h))
+
+            for i in range(n_teeth):
+                x = -pitch * half + i * pitch
+                t = pg.rectangle(size=(tooth_w, tooth_h), layer=layer_a)
+                t_ref = D << t
+                t_ref.move((x - tooth_w / 2, 0))
+
+            # === MEASUREMENT COMB ===
+            spine_b_w = pitch_b * (n_teeth - 1) + tooth_w
+            spine_b = pg.rectangle(size=(spine_b_w, spine_h), layer=layer_b)
+            spine_b_ref = D << spine_b
+            spine_b_ref.move((-spine_b_w / 2 - tooth_w + 1, -tooth_h - spine_h))
+
+            for i in range(n_teeth):
+                x = -pitch_b * half + i * pitch_b
+                t = pg.rectangle(size=(tooth_w, tooth_h), layer=layer_b)
+                t_ref = D << t
+                t_ref.move((x - tooth_w / 2, -tooth_h))
+
+            # === TICK LABELS ===
+            resolution = pitch / n_teeth
+            for i in range(n_teeth):
+                val = (i - half) * resolution
+                if val == 0:
+                    label_str = "0"
+                elif val == int(val):
+                    label_str = str(int(val))
+                else:
+                    label_str = f"{val:.1f}"
+
+                lbl = pg.text(text=label_str, size=label_size, layer=layer_b)
+                lbl.rotate(90)
+                lbl.move((15, -15))
+                lbl_ref = D << lbl
+                lbl_w = lbl_ref.bbox[1][0] - lbl_ref.bbox[0][0]
+                x = -pitch_b * half + i * pitch_b
+                lbl_ref.move((x - lbl_w / 2, -tooth_h - spine_h - label_size * 1.8))
+
+            return D
+
+        ###################################################
+        # Place Vernier marks around the wafer edge
+        ###################################################
+        def place_vernier_marks(wafer, layers_pairs, positions, pitch=20, n_teeth=11,
+                                tooth_w=8, tooth_h=60):
+            """
+            Places Vernier alignment marks at multiple positions on the wafer.
+
+            layers_pairs : list of (layer_a, layer_b) tuples, one mark per pair
+                        e.g. [(1,2), (1,3), (2,3)]
+            positions    : list of (x, y) center positions for each mark
+            """
+            for (la, lb), (x, y) in zip(layers_pairs, positions):
+                mark = vernier_mark(
+                    pitch=pitch,
+                    n_teeth=n_teeth,
+                    tooth_w=tooth_w,
+                    tooth_h=tooth_h,
+                    layer_a=la,
+                    layer_b=lb
+                )
+                ref = wafer << mark
+                ref.move((x, y))
+
+        ###################################################
+        # Wafer Layout
+        ###################################################
+        wafer = Device("wafer")
+
+        wafer_radius = 75000
+
+        wafer_outline = pg.circle(
+            radius=wafer_radius,
+            layer=10
+        )
+
+        left_bottom_cross = alignment_cross(800, 20, 1, 0)
+        right_bottom_cross = alignment_cross(800, 20, 1, 90)
+        left_top_cross = alignment_cross(800, 20, 1, 180)
+        right_top_cross = alignment_cross(800, 20, 1, 270)
+
+        # Center cross
+        wafer << left_bottom_cross
+        wafer.references[-1].move((-40000, -50000))
+        wafer << right_bottom_cross
+        wafer.references[-1].move((40000, -50000))
+        wafer << left_top_cross
+        wafer.references[-1].move((-40000, 50000))
+        wafer << right_top_cross
+        wafer.references[-1].move((40000, 50000))
+
+        line1 = pg.text(
+            text="6.2600 Final Project Spring 2026",
+            size=1500,
+            layer=3
+        )
+        line2 = pg.text(
+            text="Elijah Haga, Corey Decker, and Diego de Lope",
+            size=1000,
+            layer=3
+        )
+        line3 = pg.text(
+            text="High-Frequency RF Power Sensor",
+            size=1000,
+            layer=3
+        )
+
+
+        y_top = 60000
+        line_spacing = 2000
+
+        ref1 = wafer << line1
+        ref2 = wafer << line2
+        ref3 = wafer << line3
+
+        for ref, txt_obj in [(ref1, line1), (ref2, line2), (ref3, line3)]:
+            bbox = ref.bbox
+            w = bbox[1][0] - bbox[0][0]
+            ref.move((-w / 2, 0))
+
+        ref1.move((0, y_top))
+        ref2.move((0, y_top - 1500 - line_spacing))
+        ref3.move((0, y_top - 1500 - line_spacing - 1000 - line_spacing))
+
+        tlm = tlm_strip(
+            spacings=[500, 1000, 1500, 2000, 2500],
+            contact_thickness=500,
+            contact_length=3000,
+        )
+
+        tlm_ref = wafer << tlm
+
+        tlm_bbox = tlm_ref.bbox
+        tlm_w = tlm_bbox[1][0] - tlm_bbox[0][0]
+        tlm_ref.move((-tlm_w / 2, -55000))
+
+        layer_pairs = [(1, 2), (1, 3), (2, 3)]
+
+        vernier_positions = [
+            # Left edge cluster
+            (-67500, 5000),
+            (-67500,  0),
+            (-67500, -5000),
+            # Bottom-left cluster
+            (-30000, -62000),
+            (-18000, -62000),
+            ( -6000, -62000),
+        ]
+
+        # Repeat layer pairs for both clusters
+        place_vernier_marks(
+            wafer,
+            layer_pairs * 2,
+            vernier_positions,
+            pitch=20,
+            n_teeth=10,
+            tooth_w=10,
+            tooth_h=60
+        )
+
+        wafer << wafer_outline
+
+        ###################################################
+        # Place designs
+        ###################################################
+        cols = 16
+        rows = 12
+        spacing = 7500
+
+        n = 0
+
+        class Params:
+            pass
+
+        dual_dipole_dimensions = [
+            # Optimized for 75 GHz
+            2790, # Dimension A
+            760, # Dimension B
+            320, # Dimension C
+            61, # Dimension D
+            79, # Dimension E
+            9.2, # Dimension F
+            860, # Dimension G
+            310 # Dimension H
+            ]
+
+        resistive_antenna_dimensions = [
+            674.5, # Antenna length
+            37, # Antenna initial width
+            1, # Antenna final width
+            10 # Number of segments
+            ]
+
+        folded_dipole_dimensions = [
+            722, # Major feed line length
+            37, # Feed line width
+            252, # Antenna pad thickness
+            37, # Antenna pad and feed gap
+            301 # Antenna pad length
+            ]
+
+        # Center the grid
+        x0 = -(cols - 1) / 2 * spacing
+        y0 = -(rows - 1) / 2 * spacing
+
+        # Define row-wise sweep ranges
+        body_widths = [i/10 for i in range(30, 62, 2)]
+        sch_radii   = [i/10 for i in range(20, 36, 1)]
+        gap_offsets = [i/10 for i in range(30, 46, 1)]
+
+        counter = -1
+        param_counter = -1
+
+        for row in range(rows):
+            counter += 1
+            param_counter += 1
+
+            if counter > 2:
+                counter = 0
+            if param_counter > 2:
+                param_counter = 0
+
+            for col in range(cols):
+
+                # Compute grid position
+                x_pos = x0 + col * spacing
+                y_pos = y0 + row * spacing
+
+                if (x_pos**2 + y_pos**2) > (wafer_radius - 6000)**2:
+                    continue # Removes any devices clipped by the wafer edge and beyond
+
+                p = Params()
+                # === BASE PARAMETERS ===
+                p.sch_radius = 2
+                p.sd_triangle_length = 15
+                p.metal_gap_offset = 5
+                p.hole_inset = 3
+
+                p.sd_schottky_contact_w = 40
+                p.sd_schottky_contact_h = 37
+                p.schottky_contact_trace_w = 2*p.sch_radius
+                p.schottky_contact_trace_l = 15
+
+                p.body_length = 10
+                p.body_width_1 = (2*p.sch_radius)+0.5
+                p.body_width_2 = p.sd_schottky_contact_h - 4
+
+                # === PARAMETER SWEEP ===
+
+                if (param_counter == 0):
+                    p.body_width_1 = body_widths[col]
+                elif (param_counter == 1):
+                    p.sch_radius = sch_radii[col]
+                else:
+                    p.metal_gap_offset = gap_offsets[col]
+                
+                # === ANTENNA ASSIGNMENT BY ROW ===
+
+                if row == 5:
+                    antenna_type = "dual_dipole_antenna"
+                    dev = diode_device(p, antenna_type, dual_dipole_dimensions, True)
+                elif row < 5:
+                    if (counter == 0):
+                        antenna_type = "dual_dipole_antenna"
+                        dev = diode_device(p, antenna_type, dual_dipole_dimensions, False)
+                    elif (counter == 1):
+                        antenna_type = "folded_dipole_antenna"
+                        dev = diode_device(p, antenna_type, folded_dipole_dimensions, False)
+                    else:
+                        antenna_type = "tapered_antenna"
+                        dev = diode_device(p, antenna_type, resistive_antenna_dimensions, False)
+                else:
+                    antenna_type = "dual_dipole_antenna"
+                    dev = diode_device(p, antenna_type, dual_dipole_dimensions, False)
+
+                # === POSITIONING ===
+                ref = wafer << dev
+
+                x_pos = x0 + col * spacing
+                y_pos = y0 + row * spacing
+                
+                if (row != 4):
+                    ref.move((x_pos, y_pos))
+                else:
+                    ref.move((x_pos, y_pos-1200))
+
+                add_device_outline(wafer, ref, n+1, spacing, spacing*0.1)
+
+                n += 1
+
+        ###################################################
+        # Export
+        ###################################################
+        wafer.write_gds("schottky_diode_wafer.gds")
+    </script>
+</body>

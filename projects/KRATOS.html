@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://elijahhaga.github.io/docs/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+    <script defer src="https://elijahhaga.github.io/app.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="hidden">
+        <p>
+            <font size="5" color="white">
+                <b>
+                    KRATOS (30 Pound Combat Robot)
+                </b>
+            </font>
+        </p>
+    </div>
+
+    <hr noshade size="4" color="#DEE4E1" width="95%" align="center" class="hidden" style="margin-bottom:40px; margin-top:10px"/>
+
+    <div class="hidden">
+        <div id="carousel-vesc" class="splide" aria-label="VESC Pictures">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC 3D Corner.png" height="500" width="500" alt="VESC 3D Corner" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC 3D Front.png" height="475" width="475" alt="VESC 3D Front" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC 3D Back.png" height="475" width="475" alt="VESC 3D Back" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC 2D Layout Front.png" height="475" width="475" alt="VESC 2D Layout Front" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC 2D Layout Back.png" height="475" width="475" alt="VESC 2D Layout Back" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC Main Schematic.png" height="600" width="600" alt="VESC 3D Back" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC STM32 Schematic.png" height="600" width="600" alt="VESC STM32 Schematic" align="middle"/>
+                    </li>
+                    <li class="splide__slide">
+                        <img src="https://elijahhaga.github.io/docs/assets/VESC nRF52832 Schematic.png" height="600" width="600" alt="VESC nRF52832 Schematic" align="middle"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden" style="margin-top:20px">
+        <p>
+            <font size="3" color="white">
+                I am an executive member of the MIT Combat Robotics Team, specifically one of the manufacturing chairs. I am
+                also the captain of our new 30-pound robot, KRATOS, which our previous club president designed last year. One of 
+                the main issues I was left with to fix was the poor quality of the commercial motor controllers we were using.
+                The company that made them based their design on the open-source <a href="https://vesc-project.com/">VESC Project</a>, founded by Benjamin Vedder, 
+                so over this summer, I have developed an improved version. My version of the VESC can handle 200 Amps of continuous 
+                current at 48V, while giving us more features than the base VESC design, such as Bluetooth, a built-in opto-isolator, 
+                better shielding, and improved protective measures. I am still working on this project, and I am currently adding 
+                said protective measures, including reverse polarity protection, overvoltage and overcurrent protection, and 
+                the ability to power the board off of USB-C, which the original VESC didn't have. I will also have to write my firmware 
+                for the Bluetooth module, as it is an updated chip from the one in the original VESC.
+            </font>
+        </p>
+    </div>
+</body>
