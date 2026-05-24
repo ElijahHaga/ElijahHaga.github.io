@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const hiddenElements = document.querySelectorAll('.hidden');
     hiddenElements.forEach((el) => observer.observe(el));
 
-    ["carousel-vesc", "carousel-motor-controller", "carousel-chainsaw-massacre", "carousel-tof-board", "carousel-this-page"].forEach(id => {
+    ["carousel-kratos", "carousel-rf-power-sensor", "carousel-vesc", "carousel-motor-controller", "carousel-chainsaw-massacre", "carousel-tof-board", "carousel-this-page"].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             new Splide(el, {
